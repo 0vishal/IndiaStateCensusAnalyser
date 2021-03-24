@@ -14,7 +14,10 @@ public class StateCensusAnalyserTest {
         private String file_type="C:/User/ADMIN/IndiaStateCensusData.txt";
         private String delimiter_type="\"/Users/ADMIN/Downloads/IndiaStateCensusData.csv";
         private String header_type="C:/User/ADMIN/Documents/IndiaStateCensusData.csv";
-        private String correct_path="C:/Users/ADMIN/Downloads/IndiaStateCode";
+        private String correct_path="C:/Users/ADMIN/Downloads/IndiaStateCode.csv";
+        private String wrong_file_type="C:/User/ADMIN/IndiaStateCode.txt";
+
+
 
 
 
@@ -33,21 +36,14 @@ public class StateCensusAnalyserTest {
 
         @Test
         public void Wrong_path_Customexception() {
-        try {
-            stateCensusAnalyser.loadData(wrong_path);
-        } catch (CustomException e) {
-            System.out.println(e.getMessage());
-            Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File,e.type);        }
+            try {
+                stateCensusAnalyser.loadData(wrong_path);
+            } catch (CustomException e) {
+                System.out.println(e.getMessage());
+                Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File, e.type);
+            }
         }
-        @Test
-        public void Wrong_filetype_Customexception() throws CustomException {
-        try {
-            stateCensusAnalyser.loadData(file_type);
-        } catch (CustomException e) {
-            System.out.println(e.type);
-            Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File_Type,e.type);
-        }
-        }
+
         @Test
         public void Wrong_delimitertype_Customexception() throws CustomException {
         try {
@@ -82,7 +78,16 @@ public class StateCensusAnalyserTest {
         } catch (CustomException e) {
             System.out.println(e.getMessage());
             Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File,e.type);        }
-    }
+        }
 
+        @Test
+        public void Wrong_filetype_StateCodeFile() throws CustomException {
+        try {
+            stateCensusAnalyser.loadStateCodeData(wrong_file_type);
+        } catch (CustomException e) {
+            System.out.println(e.type);
+            Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File_Type,e.type);
+        }
+        }
 
 }
