@@ -45,7 +45,7 @@ public class StateCensusAnalyser {
         }
     }
 
-    public static int loadStateCodeData(String path) throws CustomException {
+    public  int loadStateCodeData(String path) throws CustomException {
         if (path.contains(".csv")) {
             int records = 0;
             try {
@@ -62,6 +62,8 @@ public class StateCensusAnalyser {
                 }
             } catch (IOException e) {
                 throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_File);
+            }catch (RuntimeException e) {
+                throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_delimiter_Type);
             }
             return records;
         } else {
