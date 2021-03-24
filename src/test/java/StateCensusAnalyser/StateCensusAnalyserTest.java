@@ -17,6 +17,7 @@ public class StateCensusAnalyserTest {
         private String correct_path="C:/Users/ADMIN/Downloads/IndiaStateCode.csv";
         private String wrong_file_type="C:/User/ADMIN/IndiaStateCode.txt";
         private String delimiter_type_sc="\"/Users/ADMIN/Downloads/IndiaStateCode.csv";
+        private String header_type_sc="C:/User/ADMIN/IndiaStateCode.txt";
 
 
 
@@ -99,6 +100,15 @@ public class StateCensusAnalyserTest {
             System.out.println(e.type);
             Assertions.assertEquals(CustomException.Exceptiontype.Wrong_delimiter_Type, e.type);
         }
-    }
+        }
+        @Test
+        public void Wrong_headertype_StateCode() throws CustomException {
+        try {
+            stateCensusAnalyser.loadStateCodeData(header_type_sc);
+        } catch (CustomException e) {
+            System.out.println(e.type);
+            Assertions.assertEquals(CustomException.Exceptiontype.Wrong_header_Type, e.type);
+        }
+        }
 
 }
