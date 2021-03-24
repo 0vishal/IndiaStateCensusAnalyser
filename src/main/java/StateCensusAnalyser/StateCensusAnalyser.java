@@ -33,6 +33,9 @@ public class StateCensusAnalyser {
                 } catch (IOException e) {
                     throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_File);
                 }
+                catch (RuntimeException e){
+                    throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_delimiter_Type);
+                }
                 return i;
             }
             else {
