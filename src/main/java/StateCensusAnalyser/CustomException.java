@@ -4,7 +4,7 @@ public class CustomException extends Exception {
     public  Exceptiontype type;
 
     public enum Exceptiontype {
-        Wrong_File,Wrong_File_Type,Wrong_delimiter_Type;
+        Wrong_File,Wrong_File_Type,Wrong_delimiter_Type,Wrong_header_Type;
     }
 
 
