@@ -32,7 +32,7 @@ public class StateCensusAnalyserTest {
         }
 
         @Test
-        public void Wrong_path_Customexception() throws CustomException {
+        public void Wrong_path_Customexception() {
         try {
             stateCensusAnalyser.loadData(wrong_path);
         } catch (CustomException e) {
@@ -71,9 +71,18 @@ public class StateCensusAnalyserTest {
 
         @Test
         public void Return_Statecodecount() throws CustomException {
-        int noofentries = StateCensusAnalyser.loadStateCodeData(correct_path);
+        int noofentries = stateCensusAnalyser.loadStateCodeData(correct_path);
         Assertions.assertEquals(37, noofentries);
         }
+
+        @Test
+        public void Wrong_path_StateCodeFile() throws CustomException {
+        try {
+             stateCensusAnalyser.loadStateCodeData(wrong_path);
+        } catch (CustomException e) {
+            System.out.println(e.getMessage());
+            Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File,e.type);        }
+    }
 
 
 }

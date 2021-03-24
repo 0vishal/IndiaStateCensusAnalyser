@@ -61,8 +61,8 @@ public class StateCensusAnalyser {
                 CSVStateCode censusAnalyser=csvStateCensusAnalyserIterator.next();
                 records++;
             }
-            }catch (Exception e){
-            System.out.println(e.getMessage());
+            }catch (IOException e) {
+                throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_File);
             }
             return records;
             }
