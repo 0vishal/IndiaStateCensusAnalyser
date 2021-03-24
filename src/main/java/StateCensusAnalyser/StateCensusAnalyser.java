@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 public class StateCensusAnalyser {
     
-        public int loadData(String path)  {
+        public int loadData(String path) throws CustomException {
             int i=0;
             try{
                 Reader reader= Files.newBufferedReader(Paths.get(path));
@@ -29,9 +29,9 @@ public class StateCensusAnalyser {
                     System.out.println("Country : " + censusAnalyser.getDensityPerSqKm());
                     i++;
                 }
-            }catch (Exception e){
-                e.printStackTrace();
-                }
+            }catch (IOException e){
+                throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_File);
+            }
             return i;
 
     }
