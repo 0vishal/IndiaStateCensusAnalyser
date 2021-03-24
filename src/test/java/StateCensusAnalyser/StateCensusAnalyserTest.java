@@ -11,6 +11,8 @@ public class StateCensusAnalyserTest {
         private StateCensusAnalyser stateCensusAnalyser;
         private String  path="C:/Users/ADMIN/Downloads/IndiaStateCensusData.csv";
         private String wrong_path="C:/User/ADMIN/IndianStateCensusData.csv";
+        private String file_type="C:/User/ADMIN/IndiaStateCensusData.txt";
+
 
 
     @BeforeAll
@@ -33,5 +35,13 @@ public class StateCensusAnalyserTest {
             System.out.println(e.getMessage());
             Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File,e.type);        }
         }
-
+        @Test
+        public void Wrong_filetype_Customexception() throws CustomException {
+        try {
+            stateCensusAnalyser.loadData(file_type);
+        } catch (CustomException e) {
+            System.out.println(e.type);
+            Assertions.assertEquals(CustomException.Exceptiontype.Wrong_File_Type,e.type);
+        }
+    }
     }

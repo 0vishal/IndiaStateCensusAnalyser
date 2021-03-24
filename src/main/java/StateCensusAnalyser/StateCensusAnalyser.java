@@ -12,27 +12,33 @@ import java.util.Iterator;
 public class StateCensusAnalyser {
     
         public int loadData(String path) throws CustomException {
-            int i=0;
-            try{
-                Reader reader= Files.newBufferedReader(Paths.get(path));
-                CsvToBean csvToBean=new CsvToBeanBuilder(reader).withType(CSVStateCensus.class)
-                        .withIgnoreLeadingWhiteSpace(true)
-                        .build();
+            if(path.contains(".csv")) {
+                int i = 0;
+                try {
+                    Reader reader = Files.newBufferedReader(Paths.get(path));
+                    CsvToBean csvToBean = new CsvToBeanBuilder(reader).withType(CSVStateCensus.class)
+                            .withIgnoreLeadingWhiteSpace(true)
+                            .build();
 
-                Iterator<CSVStateCensus> csvStateCensusAnalyserIterator=csvToBean.iterator();
+                    Iterator<CSVStateCensus> csvStateCensusAnalyserIterator = csvToBean.iterator();
 
-                while(csvStateCensusAnalyserIterator.hasNext()){
-                    CSVStateCensus censusAnalyser=csvStateCensusAnalyserIterator.next();
-                    System.out.println("Name : " + censusAnalyser.getState());
-                    System.out.println("Email : " + censusAnalyser.getPopulation());
-                    System.out.println("PhoneNo : " + censusAnalyser.getAreaInSqKm());
-                    System.out.println("Country : " + censusAnalyser.getDensityPerSqKm());
-                    i++;
+                    while (csvStateCensusAnalyserIterator.hasNext()) {
+                        CSVStateCensus censusAnalyser = csvStateCensusAnalyserIterator.next();
+                        System.out.println("Name : " + censusAnalyser.getState());
+                        System.out.println("Email : " + censusAnalyser.getPopulation());
+                        System.out.println("PhoneNo : " + censusAnalyser.getAreaInSqKm());
+                        System.out.println("Country : " + censusAnalyser.getDensityPerSqKm());
+                        i++;
+                    }
+                } catch (IOException e) {
+                    throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_File);
                 }
-            }catch (IOException e){
-                throw new CustomException(e.getMessage(), CustomException.Exceptiontype.Wrong_File);
+                return i;
             }
-            return i;
+            else {
+                    throw new CustomException("Wrong file type", CustomException.Exceptiontype.Wrong_File_Type);
 
+                }
+            }
     }
-    }
+
