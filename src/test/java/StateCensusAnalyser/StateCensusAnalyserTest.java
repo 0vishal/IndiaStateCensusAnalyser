@@ -14,6 +14,7 @@ public class StateCensusAnalyserTest {
         private String file_type="C:/User/ADMIN/IndiaStateCensusData.txt";
         private String delimiter_type="\"/Users/ADMIN/Downloads/IndiaStateCensusData.csv";
         private String header_type="C:/User/ADMIN/Documents/IndiaStateCensusData.csv";
+        private String correct_path="C:/Users/ADMIN/Downloads/IndiaStateCode";
 
 
 
@@ -67,4 +68,12 @@ public class StateCensusAnalyserTest {
         }
         }
 
-    }
+
+        @Test
+        public void Return_Statecodecount() throws CustomException {
+        int noofentries = StateCensusAnalyser.loadStateCodeData(correct_path);
+        Assertions.assertEquals(37, noofentries);
+        }
+
+
+}

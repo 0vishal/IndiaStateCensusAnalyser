@@ -46,5 +46,25 @@ public class StateCensusAnalyser {
 
                 }
             }
+
+            public static int loadStateCodeData(String path) throws CustomException {
+            int records=0;
+            try {
+            Reader reader = Files.newBufferedReader(Paths.get(path));
+            CsvToBean<CSVStateCode> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(CSVStateCode.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            Iterator<CSVStateCode> csvStateCensusAnalyserIterator = csvToBean.iterator();
+            while (csvStateCensusAnalyserIterator.hasNext()) {
+                CSVStateCode censusAnalyser=csvStateCensusAnalyserIterator.next();
+                records++;
+            }
+            }catch (Exception e){
+            System.out.println(e.getMessage());
+            }
+            return records;
+            }
     }
 
